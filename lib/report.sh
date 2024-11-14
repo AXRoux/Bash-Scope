@@ -8,13 +8,31 @@ get_timestamp() {
 # Create report directory if it doesn't exist
 init_report_dir() {
     local report_dir=$(read_config "report.output_dir" "reports")
+    
+    # First check if directory exists
     if [ ! -d "$report_dir" ]; then
-        mkdir -p "$report_dir"
-        if [ $? -ne 0 ]; then
-            print_error "Failed to create reports directory"
-            return 1
-        fi
+        # Try to create directory with proper permissions
+        mkdir -p "$report_dir" 2>/dev/null || {
+            print_error "Failed to create reports directory: Permission denied"
+            # Try in user's home directory as fallback
+            report_dir="$HOME/sysscope_reports"
+            print_warning "Attempting to create reports in home directory: $report_dir"
+            mkdir -p "$report_dir" 2>/dev/null || {
+                print_error "Failed to create reports directory in home directory"
+                return 1
+            }
+        }
     fi
+
+    # Verify write permissions
+    if [ ! -w "$report_dir" ]; then
+        print_error "No write permission for reports directory: $report_dir"
+        return 1
+    fi
+
+    # Set proper permissions
+    chmod 755 "$report_dir" 2>/dev/null || print_warning "Could not set directory permissions"
+    
     echo "$report_dir"
 }
 
@@ -25,8 +43,10 @@ generate_html_report() {
     [ $? -ne 0 ] && return 1
     
     local report_file="${report_dir}/report_${timestamp}.html"
+    local temp_file="${report_dir}/.temp_${timestamp}.html"
 
-    cat > "$report_file" << EOL
+    # First write to a temporary file
+    cat > "$temp_file" 2>/dev/null << EOL
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,12 +92,24 @@ generate_html_report() {
 </html>
 EOL
 
-    if [ $? -eq 0 ]; then
-        print_success "HTML report generated: $report_file"
-    else
-        print_error "Failed to generate HTML report"
+    if [ $? -ne 0 ]; then
+        print_error "Failed to create temporary HTML report"
+        rm -f "$temp_file" 2>/dev/null
         return 1
     fi
+
+    # Move temporary file to final location
+    mv "$temp_file" "$report_file" 2>/dev/null || {
+        print_error "Failed to save HTML report"
+        rm -f "$temp_file" 2>/dev/null
+        return 1
+    }
+
+    # Set proper permissions
+    chmod 644 "$report_file" 2>/dev/null || print_warning "Could not set file permissions"
+
+    print_success "HTML report generated: $report_file"
+    return 0
 }
 
 # Generate text report
@@ -87,7 +119,9 @@ generate_text_report() {
     [ $? -ne 0 ] && return 1
     
     local report_file="${report_dir}/report_${timestamp}.txt"
+    local temp_file="${report_dir}/.temp_${timestamp}.txt"
 
+    # First write to a temporary file
     {
         echo "SysScope System Report"
         echo "Generated: $(date)"
@@ -111,14 +145,26 @@ generate_text_report() {
         echo "Network Information"
         echo "------------------"
         get_network_info
-    } > "$report_file"
+    } > "$temp_file" 2>/dev/null
 
-    if [ $? -eq 0 ]; then
-        print_success "Text report generated: $report_file"
-    else
-        print_error "Failed to generate text report"
+    if [ $? -ne 0 ]; then
+        print_error "Failed to create temporary text report"
+        rm -f "$temp_file" 2>/dev/null
         return 1
     fi
+
+    # Move temporary file to final location
+    mv "$temp_file" "$report_file" 2>/dev/null || {
+        print_error "Failed to save text report"
+        rm -f "$temp_file" 2>/dev/null
+        return 1
+    }
+
+    # Set proper permissions
+    chmod 644 "$report_file" 2>/dev/null || print_warning "Could not set file permissions"
+
+    print_success "Text report generated: $report_file"
+    return 0
 }
 
 # Get system information
@@ -166,3 +212,11 @@ generate_reports() {
     # Return success only if all enabled reports were generated
     [ $success -eq ${#formats[@]} ]
 }
+
+export -f generate_reports
+export -f generate_html_report
+export -f generate_text_report
+export -f get_system_info
+export -f get_network_info
+export -f get_timestamp
+export -f init_report_dir

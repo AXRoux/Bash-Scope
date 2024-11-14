@@ -59,7 +59,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "./sysscope.sh --report"
+args = "chmod +x sysscope.sh lib/*.sh && ./sysscope.sh --report"
 
 [deployment]
 run = ["sh", "-c", "chmod +x sysscope.sh && ./sysscope.sh --all"]
