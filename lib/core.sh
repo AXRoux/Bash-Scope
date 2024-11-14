@@ -11,7 +11,7 @@ check_requirements() {
     fi
 
     # Check essential commands
-    local required_commands=("top" "free" "df" "ps" "awk" "sed" "grep")
+    local required_commands=("top" "free" "df" "ps" "awk" "sed" "grep" "python3")
     for cmd in "${required_commands[@]}"; do
         if ! command -v "$cmd" &> /dev/null; then
             missing_deps+=("$cmd")
@@ -60,10 +60,12 @@ get_process_list() {
 # Check system logs
 check_system_logs() {
     print_header "Recent System Logs"
+    local log_lines=$(read_config "logging.system_log_lines" "10")
+    
     if [ -f /var/log/syslog ]; then
-        tail -n 10 /var/log/syslog
+        tail -n "$log_lines" /var/log/syslog
     elif [ -f /var/log/messages ]; then
-        tail -n 10 /var/log/messages
+        tail -n "$log_lines" /var/log/messages
     else
         print_warning "No system log file found"
     fi
@@ -71,9 +73,9 @@ check_system_logs() {
 
 # System health check
 check_system_health() {
-    local cpu_threshold=90
-    local mem_threshold=90
-    local disk_threshold=90
+    local cpu_threshold=$(read_config "thresholds.cpu" "90")
+    local mem_threshold=$(read_config "thresholds.memory" "90")
+    local disk_threshold=$(read_config "thresholds.disk" "90")
 
     print_header "System Health Check"
 

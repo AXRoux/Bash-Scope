@@ -1,0 +1,24 @@
+# SysScope Configuration File
+
+# System monitoring thresholds
+thresholds:
+  cpu: 90  # CPU usage threshold (percentage)
+  memory: 90  # Memory usage threshold (percentage)
+  disk: 90  # Disk usage threshold (percentage)
+
+# Network monitoring settings
+network:
+  ping_target: "8.8.8.8"  # Default ping target for connectivity tests
+  ping_count: 3  # Number of pings to perform
+  dns_test_domain: "google.com"  # Domain to test DNS resolution
+
+# Kubernetes settings
+kubernetes:
+  check_interval: 300  # Check interval in seconds
+  pod_log_lines: 50  # Number of log lines to fetch
+  all_namespaces: true  # Check pods in all namespaces
+
+# Logging settings
+logging:
+  system_log_lines: 10  # Number of system log lines to show
+  enable_debug: false  # Enable debug logging

@@ -2,6 +2,7 @@
 
 # Import libraries
 source lib/colors.sh
+source lib/config.sh
 source lib/core.sh
 source lib/kubernetes.sh
 source lib/network.sh
@@ -20,6 +21,7 @@ Options:
   -k, --k8s        Run Kubernetes diagnostics
   -n, --network    Run network diagnostics
   -a, --all        Run all diagnostics
+  -c, --config     Specify custom config file
   -h, --help       Show this help message
   -v, --version    Show version information
 EOF
@@ -80,6 +82,12 @@ main() {
         exit 1
     fi
 
+    # Validate configuration file
+    if ! validate_config; then
+        print_error "Invalid configuration file"
+        exit 1
+    fi
+
     # Parse command line arguments
     while [ $# -gt 0 ]; do
         case "$1" in
@@ -90,6 +98,15 @@ main() {
             -v|--version)
                 show_version
                 exit 0
+                ;;
+            -c|--config)
+                if [ -n "$2" ]; then
+                    CONFIG_FILE="$2"
+                    shift
+                else
+                    print_error "Config file path required"
+                    exit 1
+                fi
                 ;;
             -s|--system)
                 run_system_diagnostics
