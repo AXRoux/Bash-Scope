@@ -9,32 +9,56 @@ source lib/report.sh
 
 VERSION="1.0.0"
 
+# Display content using less in a man-page style
+display_help_content() {
+    local content="$1"
+    echo "$content" | less -R --quiet --no-init --prompt="Manual page - press 'q' to exit" --use-color
+}
+
 # Show command-specific help
 show_command_help() {
     local command="$1"
+    local help_content=""
+    
     case "$command" in
         "system"|"-s"|"--system")
-            cat << EOF
-COMMAND: system (-s, --system)
+            help_content=$(cat << EOF
+SYSTEM(1)                                    System Commands                                    SYSTEM(1)
+
+NAME
+    system - Perform comprehensive system diagnostics
+
+SYNOPSIS
+    $(basename "$0") --system
 
 DESCRIPTION
     Performs comprehensive system diagnostics including CPU, memory, disk usage 
     analysis, and process monitoring.
 
-USAGE
-    $(basename "$0") --system
-
 OPTIONS
     None
 
 OUTPUT
-    - CPU usage percentage
-    - Memory utilization
-    - Disk space usage
-    - System load averages
-    - Top processes by resource usage
-    - System logs analysis
-    - Overall system health status
+    CPU usage percentage
+        Shows current CPU utilization across all cores
+    
+    Memory utilization
+        Displays RAM usage and swap space status
+    
+    Disk space usage
+        Reports storage utilization for mounted filesystems
+    
+    System load averages
+        Shows 1, 5, and 15-minute load averages
+    
+    Top processes
+        Lists processes consuming most system resources
+    
+    System logs
+        Recent system log entries and important messages
+    
+    System health
+        Overall health status based on configured thresholds
 
 EXAMPLES
     1. Run system diagnostics:
@@ -43,31 +67,55 @@ EXAMPLES
     2. Run system diagnostics and generate report:
        $ $(basename "$0") --system --report
 
+CONFIGURATION
+    Thresholds can be configured in sysscope.yaml:
+        thresholds:
+            cpu: 90    # CPU usage threshold (percentage)
+            memory: 90 # Memory usage threshold (percentage)
+            disk: 90   # Disk usage threshold (percentage)
+
 NOTES
-    - Some metrics may require root privileges for full access
-    - Thresholds can be configured in sysscope.yaml
+    Some metrics may require root privileges for full access.
+
+SEE ALSO
+    network(1), report(1), all(1)
 EOF
+)
             ;;
         "network"|"-n"|"--network")
-            cat << EOF
-COMMAND: network (-n, --network)
+            help_content=$(cat << EOF
+NETWORK(1)                                   Network Commands                                   NETWORK(1)
+
+NAME
+    network - Perform network connectivity tests and analysis
+
+SYNOPSIS
+    $(basename "$0") --network
 
 DESCRIPTION
     Performs network connectivity tests, interface analysis, and port scanning.
-
-USAGE
-    $(basename "$0") --network
 
 OPTIONS
     None
 
 OUTPUT
-    - Network interface status
-    - Active connections
-    - Open ports analysis
-    - DNS resolution status
-    - Network performance metrics
-    - Connectivity test results
+    Network interface status
+        Status of all network interfaces and their configurations
+    
+    Active connections
+        List of current network connections and their states
+    
+    Open ports
+        Analysis of listening ports and associated services
+    
+    DNS resolution
+        DNS server responsiveness and resolution tests
+    
+    Network performance
+        Basic network performance metrics
+    
+    Connectivity tests
+        Results of ping tests to configured targets
 
 EXAMPLES
     1. Run network diagnostics:
@@ -78,39 +126,51 @@ EXAMPLES
 
 CONFIGURATION
     Network settings in sysscope.yaml:
-    - ping_target: Default ping test target
-    - ping_count: Number of ping attempts
-    - dns_test_domain: Domain for DNS checks
+        network:
+            ping_target: "8.8.8.8"     # Default ping target
+            ping_count: 3              # Number of pings
+            dns_test_domain: "google.com"
+
+SEE ALSO
+    system(1), report(1), all(1)
 EOF
+)
             ;;
         "report"|"-r"|"--report")
-            cat << EOF
-COMMAND: report (-r, --report)
+            help_content=$(cat << EOF
+REPORT(1)                                    Report Commands                                    REPORT(1)
 
-DESCRIPTION
-    Generates detailed system reports in multiple formats.
+NAME
+    report - Generate detailed system reports
 
-USAGE
+SYNOPSIS
     $(basename "$0") --report [--config <config_file>]
 
+DESCRIPTION
+    Generates detailed system reports in multiple formats with proper file permissions.
+
 OPTIONS
-    --config    Specify custom configuration file
+    --config <config_file>
+        Specify custom configuration file path
 
 OUTPUT FORMATS
-    1. HTML Report
-       - Interactive web-based format
-       - Color-coded status indicators
-       - Collapsible sections
+    HTML Report
+        - Interactive web-based format
+        - Color-coded status indicators
+        - Collapsible sections
+        - File permissions: 644
     
-    2. Text Report
-       - Plain text for easy parsing
-       - Terminal-friendly format
+    Text Report
+        - Plain text for easy parsing
+        - Terminal-friendly format
+        - File permissions: 644
 
 CONFIGURATION
     Report settings in sysscope.yaml:
-    - formats: [text, html]
-    - output_dir: Report output directory
-    - include_sections: Sections to include
+        report:
+            formats: [text, html]
+            output_dir: reports
+            include_sections: [system, resources, processes, network]
 
 EXAMPLES
     1. Generate default reports:
@@ -118,36 +178,44 @@ EXAMPLES
     
     2. Use custom configuration:
        $ $(basename "$0") --report --config custom_config.yaml
+
+SEE ALSO
+    system(1), network(1), all(1)
 EOF
+)
             ;;
         "all"|"-a"|"--all")
-            cat << EOF
-COMMAND: all (-a, --all)
+            help_content=$(cat << EOF
+ALL(1)                                      General Commands                                      ALL(1)
+
+NAME
+    all - Execute complete system analysis
+
+SYNOPSIS
+    $(basename "$0") --all [--config <config_file>]
 
 DESCRIPTION
     Executes complete system analysis including both system and network 
     diagnostics, followed by report generation.
 
-USAGE
-    $(basename "$0") --all [--config <config_file>]
-
 OPTIONS
-    --config    Specify custom configuration file
+    --config <config_file>
+        Specify custom configuration file path
 
 COMPONENTS
-    1. System Diagnostics
-       - Resource usage analysis
-       - Process monitoring
-       - System health checks
+    System Diagnostics
+        - Resource usage analysis
+        - Process monitoring
+        - System health checks
     
-    2. Network Diagnostics
-       - Connectivity tests
-       - Interface analysis
-       - Port scanning
+    Network Diagnostics
+        - Connectivity tests
+        - Interface analysis
+        - Port scanning
     
-    3. Report Generation
-       - HTML and text reports
-       - Comprehensive results
+    Report Generation
+        - HTML and text reports
+        - Comprehensive results
 
 EXAMPLES
     1. Run complete analysis:
@@ -155,57 +223,73 @@ EXAMPLES
     
     2. With custom configuration:
        $ $(basename "$0") --all --config custom_config.yaml
+
+SEE ALSO
+    system(1), network(1), report(1)
 EOF
+)
             ;;
         *)
             show_general_help
             return 1
             ;;
     esac
+    
+    display_help_content "$help_content"
 }
 
 # Show general help message
 show_general_help() {
-    cat << EOF
-SysScope v${VERSION} - System Diagnostics Tool
+    local help_content=$(cat << EOF
+SYSSCOPE(1)                                General Commands                                SYSSCOPE(1)
+
+NAME
+    sysscope - System diagnostics and monitoring tool
+
+SYNOPSIS
+    $(basename "$0") [options]
+    $(basename "$0") --help <command>
 
 DESCRIPTION
     A comprehensive system diagnostics and monitoring tool that performs system health 
     checks, network analysis, and generates detailed reports.
 
-USAGE
-    $(basename "$0") [options]
-    $(basename "$0") --help <command>
+VERSION
+    SysScope v${VERSION}
 
 OPTIONS
-    -s, --system     Run system diagnostics
-                     Performs CPU, memory, disk usage analysis, and process monitoring
+    -s, --system
+        Run system diagnostics
+        Performs CPU, memory, disk usage analysis, and process monitoring
     
-    -n, --network    Run network diagnostics
-                     Checks network interfaces, connectivity, open ports, and performance
+    -n, --network
+        Run network diagnostics
+        Checks network interfaces, connectivity, open ports, and performance
     
-    -a, --all        Run all diagnostics
-                     Executes both system and network diagnostics, then generates reports
+    -a, --all
+        Run all diagnostics
+        Executes both system and network diagnostics, then generates reports
     
-    -r, --report     Generate system report
-                     Creates HTML and text reports in the configured output directory
+    -r, --report
+        Generate system report
+        Creates HTML and text reports in the configured output directory
     
-    -c, --config     Specify custom config file
-                     Override default config path (default: config/sysscope.yaml)
+    -c, --config
+        Specify custom config file
+        Override default config path (default: config/sysscope.yaml)
     
-    -h, --help       Show this help message
-                     Use --help <command> for detailed command help
+    -h, --help
+        Show this help message
+        Use --help <command> for detailed command help
     
-    -v, --version    Show version information
+    -v, --version
+        Show version information
 
-COMMANDS WITH DETAILED HELP
+COMMANDS
     system    System diagnostics and monitoring
     network   Network analysis and testing
     report    Report generation and formatting
     all       Complete system analysis
-
-For detailed help on any command, use:
-    $(basename "$0") --help <command>
 
 EXAMPLES
     1. Get detailed help on system command:
@@ -214,8 +298,27 @@ EXAMPLES
     2. Get detailed help on report generation:
        $ $(basename "$0") --help report
 
-For more information, visit: https://github.com/yourusername/sysscope
+FILES
+    config/sysscope.yaml
+        Main configuration file
+
+    reports/
+        Default directory for generated reports
+
+AUTHOR
+    Initial version created as a system diagnostics and monitoring tool.
+
+REPORTING BUGS
+    Report bugs to: https://github.com/yourusername/sysscope/issues
+
+COPYRIGHT
+    This is free software: you are free to change and redistribute it.
+
+SEE ALSO
+    system(1), network(1), report(1), all(1)
 EOF
+)
+    display_help_content "$help_content"
 }
 
 # Show version
