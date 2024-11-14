@@ -53,8 +53,8 @@ SysScope is a comprehensive system diagnostics and monitoring tool written in Ba
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/sysscope.git
-   cd sysscope
+   git clone https://github.com/AXRoux/Bash-Scope.git
+   cd Bash-Scope
    ```
 
 2. Make the scripts executable:
