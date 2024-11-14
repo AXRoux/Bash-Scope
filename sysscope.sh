@@ -4,23 +4,23 @@
 source lib/colors.sh
 source lib/config.sh
 source lib/core.sh
-source lib/kubernetes.sh
 source lib/network.sh
+source lib/report.sh
 
 VERSION="1.0.0"
 
 # Show help message
 show_help() {
     cat << EOF
-SysScope v${VERSION} - Advanced System Diagnostics Tool
+SysScope v${VERSION} - System Diagnostics Tool
 
 Usage: $(basename "$0") [options]
 
 Options:
   -s, --system     Run system diagnostics
-  -k, --k8s        Run Kubernetes diagnostics
   -n, --network    Run network diagnostics
   -a, --all        Run all diagnostics
+  -r, --report     Generate system report
   -c, --config     Specify custom config file
   -h, --help       Show this help message
   -v, --version    Show version information
@@ -30,13 +30,6 @@ EOF
 # Show version
 show_version() {
     echo "SysScope v${VERSION}"
-}
-
-# Check if running as root
-check_root() {
-    if [ "$EUID" -ne 0 ]; then
-        print_warning "Some features may require root privileges"
-    fi
 }
 
 # Main system diagnostics function
@@ -49,15 +42,6 @@ run_system_diagnostics() {
     get_process_list
     check_system_logs
     check_system_health
-}
-
-# Main Kubernetes diagnostics function
-run_kubernetes_diagnostics() {
-    print_header "Running Kubernetes Diagnostics"
-    get_cluster_info
-    get_node_status
-    get_pod_status
-    check_k8s_health
 }
 
 # Main network diagnostics function
@@ -111,17 +95,16 @@ main() {
             -s|--system)
                 run_system_diagnostics
                 ;;
-            -k|--k8s)
-                run_kubernetes_diagnostics
-                ;;
             -n|--network)
                 run_network_diagnostics
                 ;;
+            -r|--report)
+                generate_reports
+                ;;
             -a|--all)
-                check_root
                 run_system_diagnostics
-                run_kubernetes_diagnostics
                 run_network_diagnostics
+                generate_reports
                 ;;
             *)
                 print_error "Unknown option: $1"

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SysScope Report - 2024-11-14_10-29-18</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .section { margin: 20px 0; padding: 10px; border: 1px solid #ddd; }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>SysScope System Report</h1>
+    <p>Generated: Thu 14 Nov 2024 10:29:18 AM UTC</p>
+    <div class="section" id="system">
+        <h2>System Information</h2>
+        <pre>OS: Linux 56b00b61a0df 6.2.16 #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+Uptime: 
+Kernel: 6.2.16</pre>
+    </div>
+    <div class="section" id="resources">
+        <h2>Resource Usage</h2>
+        <p>CPU Usage: [0;34m==== CPU Usage ====[0m
+84.2%</p>
+        <p>Memory Usage: [0;34m==== Memory Usage ====[0m
+79.01%</p>
+        <p>Disk Usage: [0;34m==== Disk Usage ====[0m
+18%</p>
+        <p>System Load: [0;34m==== System Load ====[0m
+ 13.12  9.11  5.42</p>
+    </div>
+    <div class="section" id="network">
+        <h2>Network Information</h2>
+        <pre>1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+320: eth0@if321: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc tbf state UP group default qlen 1000
+    link/ether 02:42:ac:1f:c4:1a brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.31.196.26/22 brd 172.31.199.255 scope global eth0
+       valid_lft forever preferred_lft forever
+Open Ports:
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:Port
+udp   UNCONN 0      0         127.0.0.11:52120      0.0.0.0:*   
+tcp   LISTEN 0      128        127.0.0.1:1106       0.0.0.0:*   
+tcp   LISTEN 0      4096      127.0.0.11:37763      0.0.0.0:*   
+tcp   LISTEN 0      128        127.0.0.1:8283       0.0.0.0:*   
+tcp   LISTEN 0      511        127.0.0.1:8284       0.0.0.0:*   
+tcp   LISTEN 0      128                *:22               *:*   </pre>
+    </div>
+</body>
+</html>

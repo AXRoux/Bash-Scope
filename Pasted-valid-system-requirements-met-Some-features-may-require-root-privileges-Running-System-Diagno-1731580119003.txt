@@ -1,0 +1,48 @@
+valid system requirements met
+⚠ Some features may require root privileges
+==== Running System Diagnostics ====
+==== CPU Usage ====
+52.6%
+==== Memory Usage ====
+69.28%
+==== Disk Usage ====
+18%
+==== System Load ====
+ 6.45  7.67  4.71
+==== Top Processes by CPU Usage ====
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+runner     850  2.9  0.2 961740 97924 ?        Sl   10:27   0:01 node /nix/store/nmyzkai0g38sv73jgn28lmdy9bs924iw-pyright-extended-2.0.12/lib/langserver.index.js --stdio
+runner     770  2.7  0.2 961492 97728 ?        Sl   10:27   0:01 node /nix/store/nmyzkai0g38sv73jgn28lmdy9bs924iw-pyright-extended-2.0.12/lib/langserver.index.js --stdio
+runner      16  1.0  0.5 11936968 187240 ?     Sl   10:24   0:02 pid2 --no-deprecation /pid2/bundles/0.0.736/server.cjs --json-logs --start-timestamp=1731579846883 --socket-listener-fd=3
+runner       1  0.2  0.1 2297776 45184 ?       Ssl  10:22   0:00 /nix/store/0fgvx67cxa939djcg1s07j3n1wvpxf7l-pid1-0.0.1/bin/pid1
+runner      37  0.0  0.0   3796  2560 ?        S    10:24   0:00 nix-editor --return-output
+==== Recent System Logs ====
+⚠ No system log file found
+==== System Health Check ====
+✓ CPU usage normal: 62.6%
+✓ Memory usage normal: 69.0466%
+✓ Disk usage normal: 18%
+==== Running Kubernetes Diagnostics ====
+==== Kubernetes Cluster Info ====
+✗ kubectl not found
+==== Kubernetes Node Status ====
+✗ kubectl not found
+==== Kubernetes Pod Status ====
+✗ kubectl not found
+==== Kubernetes Health Check ====
+✗ kubectl not found
+==== Running Network Diagnostics ====
+==== Network Connectivity ====
+✗ No internet connection
+✗ DNS resolution failed
+==== Network Interfaces ====
+lo
+eth0@if321
+==== Open Ports ====
+ℹ Using lsof to check open ports
+pid1      1 runner 15u  IPv6 211078      0t0  TCP *:22 (LISTEN)
+pid1      1 runner 16u  IPv4 212075      0t0  TCP 127.0.0.1:8283 (LISTEN)
+pid1      1 runner 17u  IPv4 242927      0t0  TCP 127.0.0.1:1106 (LISTEN)
+bin      16 runner 22u  IPv4 240841      0t0  TCP 127.0.0.1:8284 (LISTEN)
+==== Network Performance ====
+✗ Could not measure latency

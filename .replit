@@ -11,6 +11,14 @@ author = "agent"
 task = "workflow.run"
 args = "SysScope Diagnostics"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Make Scripts Executable"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Generate Reports"
+
 [[workflows.workflow]]
 name = "SysScope Diagnostics"
 author = "agent"
@@ -24,6 +32,34 @@ task = "packager.installForAll"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "chmod +x sysscope.sh && ./sysscope.sh --all"
+
+[[workflows.workflow]]
+name = "Make Scripts Executable"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "chmod +x sysscope.sh && chmod +x lib/*.sh"
+
+[[workflows.workflow]]
+name = "Generate Reports"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./sysscope.sh --report"
 
 [deployment]
 run = ["sh", "-c", "chmod +x sysscope.sh && ./sysscope.sh --all"]
