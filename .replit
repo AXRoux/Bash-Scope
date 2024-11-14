@@ -1,0 +1,31 @@
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "SysScope Diagnostics"
+
+[[workflows.workflow]]
+name = "SysScope Diagnostics"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "chmod +x sysscope.sh && ./sysscope.sh --all"
+
+[deployment]
+run = ["sh", "-c", "chmod +x sysscope.sh && ./sysscope.sh --all"]
+
+[nix]
+channel = "stable-24_05"
