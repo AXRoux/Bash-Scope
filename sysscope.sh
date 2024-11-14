@@ -14,16 +14,61 @@ show_help() {
     cat << EOF
 SysScope v${VERSION} - System Diagnostics Tool
 
-Usage: $(basename "$0") [options]
+DESCRIPTION
+    A comprehensive system diagnostics and monitoring tool that performs system health 
+    checks, network analysis, and generates detailed reports.
 
-Options:
-  -s, --system     Run system diagnostics
-  -n, --network    Run network diagnostics
-  -a, --all        Run all diagnostics
-  -r, --report     Generate system report
-  -c, --config     Specify custom config file
-  -h, --help       Show this help message
-  -v, --version    Show version information
+USAGE
+    $(basename "$0") [options]
+
+OPTIONS
+    -s, --system     Run system diagnostics
+                     Performs CPU, memory, disk usage analysis, and process monitoring
+    
+    -n, --network    Run network diagnostics
+                     Checks network interfaces, connectivity, open ports, and performance
+    
+    -a, --all        Run all diagnostics
+                     Executes both system and network diagnostics, then generates reports
+    
+    -r, --report     Generate system report
+                     Creates HTML and text reports in the configured output directory
+    
+    -c, --config     Specify custom config file
+                     Override default config path (default: config/sysscope.yaml)
+    
+    -h, --help       Show this help message
+    
+    -v, --version    Show version information
+
+EXAMPLES
+    1. Run complete system analysis:
+       $ $(basename "$0") --all
+    
+    2. Check system resources only:
+       $ $(basename "$0") --system
+    
+    3. Generate reports with custom config:
+       $ $(basename "$0") --report --config /path/to/custom-config.yaml
+    
+    4. Check network connectivity:
+       $ $(basename "$0") --network
+
+CONFIGURATION
+    The tool uses a YAML configuration file (config/sysscope.yaml) with the following
+    key sections:
+    
+    - thresholds: Define CPU, memory, and disk usage alert levels
+    - network: Configure network test parameters
+    - report: Specify report formats and output directory
+    - logging: Control log verbosity and system log analysis
+
+OUTPUT
+    Reports are generated in both HTML and text formats with standardized permissions:
+    - Directories: 755 (drwxr-xr-x)
+    - Files: 644 (-rw-r--r--)
+
+For more information, visit: https://github.com/yourusername/sysscope
 EOF
 }
 
