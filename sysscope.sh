@@ -23,209 +23,209 @@ show_command_help() {
     case "$command" in
         "system"|"-s"|"--system")
             help_content=$(cat << EOF
-SYSTEM(1)                                    System Commands                                    SYSTEM(1)
+${BLUE}SYSTEM(1)                                    System Commands                                    SYSTEM(1)${RESET}
 
-NAME
-    system - Perform comprehensive system diagnostics
+${BLUE}NAME${RESET}
+    ${GREEN}system${RESET} - Perform comprehensive system diagnostics
 
-SYNOPSIS
-    $(basename "$0") --system
+${BLUE}SYNOPSIS${RESET}
+    ${GREEN}$(basename "$0") --system${RESET}
 
-DESCRIPTION
-    Performs comprehensive system diagnostics including CPU, memory, disk usage 
-    analysis, and process monitoring.
+${BLUE}DESCRIPTION${RESET}
+    ${CYAN}Performs comprehensive system diagnostics including CPU, memory, disk usage 
+    analysis, and process monitoring.${RESET}
 
-OPTIONS
-    None
+${BLUE}OPTIONS${RESET}
+    ${CYAN}None${RESET}
 
-OUTPUT
-    CPU usage percentage
-        Shows current CPU utilization across all cores
+${BLUE}OUTPUT${RESET}
+    ${MAGENTA}CPU usage percentage${RESET}
+        ${CYAN}Shows current CPU utilization across all cores${RESET}
     
-    Memory utilization
-        Displays RAM usage and swap space status
+    ${MAGENTA}Memory utilization${RESET}
+        ${CYAN}Displays RAM usage and swap space status${RESET}
     
-    Disk space usage
-        Reports storage utilization for mounted filesystems
+    ${MAGENTA}Disk space usage${RESET}
+        ${CYAN}Reports storage utilization for mounted filesystems${RESET}
     
-    System load averages
-        Shows 1, 5, and 15-minute load averages
+    ${MAGENTA}System load averages${RESET}
+        ${CYAN}Shows 1, 5, and 15-minute load averages${RESET}
     
-    Top processes
-        Lists processes consuming most system resources
+    ${MAGENTA}Top processes${RESET}
+        ${CYAN}Lists processes consuming most system resources${RESET}
     
-    System logs
-        Recent system log entries and important messages
+    ${MAGENTA}System logs${RESET}
+        ${CYAN}Recent system log entries and important messages${RESET}
     
-    System health
-        Overall health status based on configured thresholds
+    ${MAGENTA}System health${RESET}
+        ${CYAN}Overall health status based on configured thresholds${RESET}
 
-EXAMPLES
-    1. Run system diagnostics:
-       $ $(basename "$0") --system
+${BLUE}EXAMPLES${RESET}
+    ${CYAN}1. Run system diagnostics:${RESET}
+       ${GREEN}$ $(basename "$0") --system${RESET}
     
-    2. Run system diagnostics and generate report:
-       $ $(basename "$0") --system --report
+    ${CYAN}2. Run system diagnostics and generate report:${RESET}
+       ${GREEN}$ $(basename "$0") --system --report${RESET}
 
-CONFIGURATION
-    Thresholds can be configured in sysscope.yaml:
-        thresholds:
+${BLUE}CONFIGURATION${RESET}
+    ${CYAN}Thresholds can be configured in sysscope.yaml:${RESET}
+        ${GREEN}thresholds:
             cpu: 90    # CPU usage threshold (percentage)
             memory: 90 # Memory usage threshold (percentage)
-            disk: 90   # Disk usage threshold (percentage)
+            disk: 90   # Disk usage threshold (percentage)${RESET}
 
-NOTES
-    Some metrics may require root privileges for full access.
+${BLUE}NOTES${RESET}
+    ${YELLOW}Some metrics may require root privileges for full access.${RESET}
 
-SEE ALSO
-    network(1), report(1), all(1)
+${BLUE}SEE ALSO${RESET}
+    ${CYAN}network(1), report(1), all(1)${RESET}
 EOF
 )
             ;;
         "network"|"-n"|"--network")
             help_content=$(cat << EOF
-NETWORK(1)                                   Network Commands                                   NETWORK(1)
+${BLUE}NETWORK(1)                                   Network Commands                                   NETWORK(1)${RESET}
 
-NAME
-    network - Perform network connectivity tests and analysis
+${BLUE}NAME${RESET}
+    ${GREEN}network${RESET} - Perform network connectivity tests and analysis
 
-SYNOPSIS
-    $(basename "$0") --network
+${BLUE}SYNOPSIS${RESET}
+    ${GREEN}$(basename "$0") --network${RESET}
 
-DESCRIPTION
-    Performs network connectivity tests, interface analysis, and port scanning.
+${BLUE}DESCRIPTION${RESET}
+    ${CYAN}Performs network connectivity tests, interface analysis, and port scanning.${RESET}
 
-OPTIONS
-    None
+${BLUE}OPTIONS${RESET}
+    ${CYAN}None${RESET}
 
-OUTPUT
-    Network interface status
-        Status of all network interfaces and their configurations
+${BLUE}OUTPUT${RESET}
+    ${MAGENTA}Network interface status${RESET}
+        ${CYAN}Status of all network interfaces and their configurations${RESET}
     
-    Active connections
-        List of current network connections and their states
+    ${MAGENTA}Active connections${RESET}
+        ${CYAN}List of current network connections and their states${RESET}
     
-    Open ports
-        Analysis of listening ports and associated services
+    ${MAGENTA}Open ports${RESET}
+        ${CYAN}Analysis of listening ports and associated services${RESET}
     
-    DNS resolution
-        DNS server responsiveness and resolution tests
+    ${MAGENTA}DNS resolution${RESET}
+        ${CYAN}DNS server responsiveness and resolution tests${RESET}
     
-    Network performance
-        Basic network performance metrics
+    ${MAGENTA}Network performance${RESET}
+        ${CYAN}Basic network performance metrics${RESET}
     
-    Connectivity tests
-        Results of ping tests to configured targets
+    ${MAGENTA}Connectivity tests${RESET}
+        ${CYAN}Results of ping tests to configured targets${RESET}
 
-EXAMPLES
-    1. Run network diagnostics:
-       $ $(basename "$0") --network
+${BLUE}EXAMPLES${RESET}
+    ${CYAN}1. Run network diagnostics:${RESET}
+       ${GREEN}$ $(basename "$0") --network${RESET}
     
-    2. Combine with system diagnostics:
-       $ $(basename "$0") --network --system
+    ${CYAN}2. Combine with system diagnostics:${RESET}
+       ${GREEN}$ $(basename "$0") --network --system${RESET}
 
-CONFIGURATION
-    Network settings in sysscope.yaml:
-        network:
+${BLUE}CONFIGURATION${RESET}
+    ${CYAN}Network settings in sysscope.yaml:${RESET}
+        ${GREEN}network:
             ping_target: "8.8.8.8"     # Default ping target
             ping_count: 3              # Number of pings
-            dns_test_domain: "google.com"
+            dns_test_domain: "google.com"${RESET}
 
-SEE ALSO
-    system(1), report(1), all(1)
+${BLUE}SEE ALSO${RESET}
+    ${CYAN}system(1), report(1), all(1)${RESET}
 EOF
 )
             ;;
         "report"|"-r"|"--report")
             help_content=$(cat << EOF
-REPORT(1)                                    Report Commands                                    REPORT(1)
+${BLUE}REPORT(1)                                    Report Commands                                    REPORT(1)${RESET}
 
-NAME
-    report - Generate detailed system reports
+${BLUE}NAME${RESET}
+    ${GREEN}report${RESET} - Generate detailed system reports
 
-SYNOPSIS
-    $(basename "$0") --report [--config <config_file>]
+${BLUE}SYNOPSIS${RESET}
+    ${GREEN}$(basename "$0") --report [--config <config_file>]${RESET}
 
-DESCRIPTION
-    Generates detailed system reports in multiple formats with proper file permissions.
+${BLUE}DESCRIPTION${RESET}
+    ${CYAN}Generates detailed system reports in multiple formats with proper file permissions.${RESET}
 
-OPTIONS
-    --config <config_file>
-        Specify custom configuration file path
+${BLUE}OPTIONS${RESET}
+    ${MAGENTA}--config <config_file>${RESET}
+        ${CYAN}Specify custom configuration file path${RESET}
 
-OUTPUT FORMATS
-    HTML Report
-        - Interactive web-based format
+${BLUE}OUTPUT FORMATS${RESET}
+    ${MAGENTA}HTML Report${RESET}
+        ${CYAN}- Interactive web-based format
         - Color-coded status indicators
         - Collapsible sections
-        - File permissions: 644
+        - File permissions: 644${RESET}
     
-    Text Report
-        - Plain text for easy parsing
+    ${MAGENTA}Text Report${RESET}
+        ${CYAN}- Plain text for easy parsing
         - Terminal-friendly format
-        - File permissions: 644
+        - File permissions: 644${RESET}
 
-CONFIGURATION
-    Report settings in sysscope.yaml:
-        report:
+${BLUE}CONFIGURATION${RESET}
+    ${CYAN}Report settings in sysscope.yaml:${RESET}
+        ${GREEN}report:
             formats: [text, html]
             output_dir: reports
-            include_sections: [system, resources, processes, network]
+            include_sections: [system, resources, processes, network]${RESET}
 
-EXAMPLES
-    1. Generate default reports:
-       $ $(basename "$0") --report
+${BLUE}EXAMPLES${RESET}
+    ${CYAN}1. Generate default reports:${RESET}
+       ${GREEN}$ $(basename "$0") --report${RESET}
     
-    2. Use custom configuration:
-       $ $(basename "$0") --report --config custom_config.yaml
+    ${CYAN}2. Use custom configuration:${RESET}
+       ${GREEN}$ $(basename "$0") --report --config custom_config.yaml${RESET}
 
-SEE ALSO
-    system(1), network(1), all(1)
+${BLUE}SEE ALSO${RESET}
+    ${CYAN}system(1), network(1), all(1)${RESET}
 EOF
 )
             ;;
         "all"|"-a"|"--all")
             help_content=$(cat << EOF
-ALL(1)                                      General Commands                                      ALL(1)
+${BLUE}ALL(1)                                      General Commands                                      ALL(1)${RESET}
 
-NAME
-    all - Execute complete system analysis
+${BLUE}NAME${RESET}
+    ${GREEN}all${RESET} - Execute complete system analysis
 
-SYNOPSIS
-    $(basename "$0") --all [--config <config_file>]
+${BLUE}SYNOPSIS${RESET}
+    ${GREEN}$(basename "$0") --all [--config <config_file>]${RESET}
 
-DESCRIPTION
-    Executes complete system analysis including both system and network 
-    diagnostics, followed by report generation.
+${BLUE}DESCRIPTION${RESET}
+    ${CYAN}Executes complete system analysis including both system and network 
+    diagnostics, followed by report generation.${RESET}
 
-OPTIONS
-    --config <config_file>
-        Specify custom configuration file path
+${BLUE}OPTIONS${RESET}
+    ${MAGENTA}--config <config_file>${RESET}
+        ${CYAN}Specify custom configuration file path${RESET}
 
-COMPONENTS
-    System Diagnostics
-        - Resource usage analysis
+${BLUE}COMPONENTS${RESET}
+    ${MAGENTA}System Diagnostics${RESET}
+        ${CYAN}- Resource usage analysis
         - Process monitoring
-        - System health checks
+        - System health checks${RESET}
     
-    Network Diagnostics
-        - Connectivity tests
+    ${MAGENTA}Network Diagnostics${RESET}
+        ${CYAN}- Connectivity tests
         - Interface analysis
-        - Port scanning
+        - Port scanning${RESET}
     
-    Report Generation
-        - HTML and text reports
-        - Comprehensive results
+    ${MAGENTA}Report Generation${RESET}
+        ${CYAN}- HTML and text reports
+        - Comprehensive results${RESET}
 
-EXAMPLES
-    1. Run complete analysis:
-       $ $(basename "$0") --all
+${BLUE}EXAMPLES${RESET}
+    ${CYAN}1. Run complete analysis:${RESET}
+       ${GREEN}$ $(basename "$0") --all${RESET}
     
-    2. With custom configuration:
-       $ $(basename "$0") --all --config custom_config.yaml
+    ${CYAN}2. With custom configuration:${RESET}
+       ${GREEN}$ $(basename "$0") --all --config custom_config.yaml${RESET}
 
-SEE ALSO
-    system(1), network(1), report(1)
+${BLUE}SEE ALSO${RESET}
+    ${CYAN}system(1), network(1), report(1)${RESET}
 EOF
 )
             ;;
@@ -241,81 +241,81 @@ EOF
 # Show general help message
 show_general_help() {
     local help_content=$(cat << EOF
-SYSSCOPE(1)                                General Commands                                SYSSCOPE(1)
+${BLUE}SYSSCOPE(1)                                General Commands                                SYSSCOPE(1)${RESET}
 
-NAME
-    sysscope - System diagnostics and monitoring tool
+${BLUE}NAME${RESET}
+    ${GREEN}sysscope${RESET} - System diagnostics and monitoring tool
 
-SYNOPSIS
-    $(basename "$0") [options]
-    $(basename "$0") --help <command>
+${BLUE}SYNOPSIS${RESET}
+    ${GREEN}$(basename "$0")${RESET} ${MAGENTA}[options]${RESET}
+    ${GREEN}$(basename "$0")${RESET} ${MAGENTA}--help <command>${RESET}
 
-DESCRIPTION
-    A comprehensive system diagnostics and monitoring tool that performs system health 
-    checks, network analysis, and generates detailed reports.
+${BLUE}DESCRIPTION${RESET}
+    ${CYAN}A comprehensive system diagnostics and monitoring tool that performs system health 
+    checks, network analysis, and generates detailed reports.${RESET}
 
-VERSION
-    SysScope v${VERSION}
+${BLUE}VERSION${RESET}
+    ${CYAN}SysScope v${VERSION}${RESET}
 
-OPTIONS
-    -s, --system
-        Run system diagnostics
-        Performs CPU, memory, disk usage analysis, and process monitoring
+${BLUE}OPTIONS${RESET}
+    ${MAGENTA}-s, --system${RESET}
+        ${CYAN}Run system diagnostics
+        Performs CPU, memory, disk usage analysis, and process monitoring${RESET}
     
-    -n, --network
-        Run network diagnostics
-        Checks network interfaces, connectivity, open ports, and performance
+    ${MAGENTA}-n, --network${RESET}
+        ${CYAN}Run network diagnostics
+        Checks network interfaces, connectivity, open ports, and performance${RESET}
     
-    -a, --all
-        Run all diagnostics
-        Executes both system and network diagnostics, then generates reports
+    ${MAGENTA}-a, --all${RESET}
+        ${CYAN}Run all diagnostics
+        Executes both system and network diagnostics, then generates reports${RESET}
     
-    -r, --report
-        Generate system report
-        Creates HTML and text reports in the configured output directory
+    ${MAGENTA}-r, --report${RESET}
+        ${CYAN}Generate system report
+        Creates HTML and text reports in the configured output directory${RESET}
     
-    -c, --config
-        Specify custom config file
-        Override default config path (default: config/sysscope.yaml)
+    ${MAGENTA}-c, --config${RESET}
+        ${CYAN}Specify custom config file
+        Override default config path (default: config/sysscope.yaml)${RESET}
     
-    -h, --help
-        Show this help message
-        Use --help <command> for detailed command help
+    ${MAGENTA}-h, --help${RESET}
+        ${CYAN}Show this help message
+        Use --help <command> for detailed command help${RESET}
     
-    -v, --version
-        Show version information
+    ${MAGENTA}-v, --version${RESET}
+        ${CYAN}Show version information${RESET}
 
-COMMANDS
-    system    System diagnostics and monitoring
-    network   Network analysis and testing
-    report    Report generation and formatting
-    all       Complete system analysis
+${BLUE}COMMANDS${RESET}
+    ${GREEN}system${RESET}    ${CYAN}System diagnostics and monitoring${RESET}
+    ${GREEN}network${RESET}   ${CYAN}Network analysis and testing${RESET}
+    ${GREEN}report${RESET}    ${CYAN}Report generation and formatting${RESET}
+    ${GREEN}all${RESET}       ${CYAN}Complete system analysis${RESET}
 
-EXAMPLES
-    1. Get detailed help on system command:
-       $ $(basename "$0") --help system
+${BLUE}EXAMPLES${RESET}
+    ${CYAN}1. Get detailed help on system command:${RESET}
+       ${GREEN}$ $(basename "$0") --help system${RESET}
     
-    2. Get detailed help on report generation:
-       $ $(basename "$0") --help report
+    ${CYAN}2. Get detailed help on report generation:${RESET}
+       ${GREEN}$ $(basename "$0") --help report${RESET}
 
-FILES
-    config/sysscope.yaml
-        Main configuration file
+${BLUE}FILES${RESET}
+    ${CYAN}config/sysscope.yaml${RESET}
+        ${CYAN}Main configuration file${RESET}
 
-    reports/
-        Default directory for generated reports
+    ${CYAN}reports/${RESET}
+        ${CYAN}Default directory for generated reports${RESET}
 
-AUTHOR
-    Initial version created as a system diagnostics and monitoring tool.
+${BLUE}AUTHOR${RESET}
+    ${CYAN}Initial version created as a system diagnostics and monitoring tool.${RESET}
 
-REPORTING BUGS
-    Report bugs to: https://github.com/yourusername/sysscope/issues
+${BLUE}REPORTING BUGS${RESET}
+    ${CYAN}Report bugs to: https://github.com/yourusername/sysscope/issues${RESET}
 
-COPYRIGHT
-    This is free software: you are free to change and redistribute it.
+${BLUE}COPYRIGHT${RESET}
+    ${CYAN}This is free software: you are free to change and redistribute it.${RESET}
 
-SEE ALSO
-    system(1), network(1), report(1), all(1)
+${BLUE}SEE ALSO${RESET}
+    ${CYAN}system(1), network(1), report(1), all(1)${RESET}
 EOF
 )
     display_help_content "$help_content"
@@ -323,7 +323,7 @@ EOF
 
 # Show version
 show_version() {
-    echo "SysScope v${VERSION}"
+    echo -e "${BLUE}SysScope${RESET} ${GREEN}v${VERSION}${RESET}"
 }
 
 # Main system diagnostics function
