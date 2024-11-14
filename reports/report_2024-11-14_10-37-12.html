@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SysScope Report - 2024-11-14_10-37-12</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .section { margin: 20px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        .info { color: blue; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        h1, h2 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>SysScope System Report</h1>
+    <p>Generated: Thu 14 Nov 2024 10:37:12 AM UTC</p>
+    
+    <div class="section" id="system">
+        <h2>System Information</h2>
+        <pre>OS: Linux bb93ddd28e4e 6.2.16 #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+Uptime:  10:37:12  up   9:38,  0 users,  load average: 24.47, 24.31, 19.74
+Kernel: 6.2.16</pre>
+    </div>
+    
+    <div class="section" id="resources">
+        <h2>Resource Usage</h2>
+        <p><strong>CPU Usage:</strong> [0;34m==== CPU Usage ====[0m
+80%</p>
+        <p><strong>Memory Usage:</strong> [0;34m==== Memory Usage ====[0m
+88.49%</p>
+        <p><strong>Disk Usage:</strong> [0;34m==== Disk Usage ====[0m
+27%</p>
+        <p><strong>System Load:</strong> [0;34m==== System Load ====[0m
+ 24.47  24.31  19.74</p>
+    </div>
+    
+    <div class="section" id="processes">
+        <h2>Process Information</h2>
+        <pre>[0;34m==== Top Processes by CPU Usage ====[0m
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+runner      15  1.1  0.2 1445348 152256 ?      Rl   10:34   0:01 pid2 --no-deprecation /pid2/bundles/0.0.736/server.cjs --json-logs --start-timestamp=1731580470964 --socket-listener-fd=3
+runner      30  0.9  0.1 962004 96744 ?        Sl   10:34   0:01 node /nix/store/nmyzkai0g38sv73jgn28lmdy9bs924iw-pyright-extended-2.0.12/lib/langserver.index.js --stdio
+runner     267  0.6  0.0   7524  3968 pts/0    Ss+  10:37   0:00 /bin/bash ./sysscope.sh --all
+runner       1  0.2  0.0 2223788 39868 ?       Ssl  10:33   0:00 /nix/store/0fgvx67cxa939djcg1s07j3n1wvpxf7l-pid1-0.0.1/bin/pid1
+runner      31  0.0  0.0 1717704 24208 ?       Sl   10:34   0:00 /nix/store/52ll6qhg3z22jvy0lydvjjiwkdqdxfqp-taplo-0.patched/bin/taplo lsp -c /nix/store/8kdm90nr2n3g4xrxxfscn5zmhp02l3mr-taplo-config.toml stdio</pre>
+    </div>
+    
+    <div class="section" id="network">
+        <h2>Network Information</h2>
+        <pre>Network Interfaces:
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+5982: eth0@if5983: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc tbf state UP group default qlen 1000
+    link/ether 02:42:ac:1f:c4:91 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.31.196.145/22 brd 172.31.199.255 scope global eth0
+       valid_lft forever preferred_lft forever
+
+Open Ports:
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:Port
+udp   UNCONN 0      0         127.0.0.11:43953      0.0.0.0:*   
+tcp   LISTEN 0      128        127.0.0.1:1106       0.0.0.0:*   
+tcp   LISTEN 0      511        127.0.0.1:8284       0.0.0.0:*   
+tcp   LISTEN 0      128        127.0.0.1:8283       0.0.0.0:*   
+tcp   LISTEN 0      4096      127.0.0.11:34263      0.0.0.0:*   
+tcp   LISTEN 0      128                *:22               *:*   </pre>
+    </div>
+</body>
+</html>
